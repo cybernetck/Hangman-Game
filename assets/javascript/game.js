@@ -29,32 +29,34 @@ function wordRandom () {
 
     }
 
-function keyPressed (event) {
-    return event.key;
-}
+// function keyPressed (event) {
+//     return event.key;
+// }
 
-function initWord(wordPassed) {
-    var i , wordTest = [];
+// function initWord(wordPassed) {
+//     var i , wordTest = [];
 
-    for (i = 0; i < wordPassed.length ; ++i)
-    {
-       wordTest[i] = "false";    
-       console.log(wordTest[i]); 
-    }
-    wordTest[wordPassed.length] = wordPassed.toString();
-    return wordTest;
-}
+//     for (i = 0; i < wordPassed.length ; ++i)
+//     {
+//        wordTest[i] = "false";    
+//        console.log(wordTest[i]); 
+//     }
+//     wordTest[wordPassed.length] = wordPassed.toString();
+//     return wordTest;
+// }
 
-function initGameBoard () {
-    var wordTest = "hootdogs".split("");
+// function initGameBoard () {
+//     var wordTest = "hootdogs".split("");
+//     var gameRefId = document.querySelector("#gameWord");
 
-    for (var x=0; x < wordTest.length; ++x) {
-        interestsRefId.innerHTML += "_";
-       }
+//     for (var x=0; x < wordTest.length; ++x) {
+//         gameRefId[x].innerHTML + " _ ";
+//        }
 
-}
+// }
 
-//var wordTest = wordRandom();
+var hide = function ()  {
+var wordTest = wordRandom();
 var wordTest = "hootdogs".split("");
 var tries = 5;
 
@@ -139,3 +141,4 @@ console.log("congrats, you've won!");
     
 }
 
+}
