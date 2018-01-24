@@ -1,0 +1,42 @@
+/*
+CSS for Hangman Game
+*/
+
+.header {
+    text-align:center;
+  }
+  
+  #score_section {
+    background-color:#eee;
+    
+  }
+  
+  #gameBoard {
+    
+    background-color:#222;
+    height:300px;
+    color:#fff;
+    padding: 20px;
+    
+  }
+  
+  #gameWord {
+  
+    margin-top:100px;
+    text-align:center;
+    color:#fff;
+    
+  }
+  
+  #gameWord h2 {
+    
+  }
+
+  #gameStatus {
+    text-align:center;
+    padding:20px;
+  }
+
+  #guesses {
+    text-align:center;
+  }
