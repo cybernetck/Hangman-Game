@@ -28,15 +28,36 @@ CSS for Hangman Game
     
   }
   
-  #gameWord h2 {
-    
-  }
-
   #gameStatus {
+
     text-align:center;
     padding:20px;
+
   }
 
   #guesses {
+
     text-align:center;
+
   }
+
+  #resetButton {
+
+    background-color:rgb(108, 116, 112);
+    width : 50%;
+    height: 80px;
+    opacity: .5;
+    transition-duration: 2000ms;
+  }
+
+  #resetButton:hover {
+
+    background-color:rgb(rgb(226, 12, 12), green, blue);
+    color: #fff;
+    width : 75%;
+    opacity: 1.0;
+    transition-duration: 2000ms;
+
+
+  }
+
