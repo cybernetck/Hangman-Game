@@ -71,20 +71,27 @@
 
 var userGuess = [];
 var tries = 11;
+
 var wordTest = wordRandom();
+//clone array
+var wordVerify = wordTest.slice(0);
+
 var wordArray = wordTest.join("");
+
+var wordAnswer = [];
 var userGuess = [];
+
 var wins = 0;
 /* regular expression to only count letters a-z as a valid try */
 var validEntry = (/a-z/);
-var wordAnswer = [];
+
 console.log(wordArray);
 
 var initBoard = function () {
 
   var gameRefId = document.querySelector("#gameWord");
 
-    for (var x=0; x < wordTest.length; ++x) {
+    for (var x=0; x < wordVerify.length; ++x) {
       wordAnswer[x] = "_";
       $("#gameWord").appendHtml(" " + wordAnswer[x] + " ");
        } 
@@ -92,19 +99,31 @@ var initBoard = function () {
    console.dir("initializing board...");
 
   }
-  
+
+var writeBoard = function () {
+console.log("writeBoard!");
+var gameRefId = document.querySelector("#gameWord");
+
+  for (var x=0; x < wordVerify.length; ++x) {
+
+    if (x === 0) {
+      $("#gameWord").html(" " + wordAnswer[x] + " ");
+    }
+    else {
+    $("#gameWord").appendHtml(" " + wordAnswer[x] + " ");
+     } 
+
+ console.dir("writing answer to board...");
+    }
+}  
+
 //game logic
 
 var checkMatch = function (event) {
  
-  console.log("Here's a peek at the word...", wordArray, "length: ", wordArray.length);
+ console.log("Here's a peek at the word...", wordArray, "length: ", wordArray.length);
 
-//while (tries > 0 && wordTest.length > 0 ) {
-//for (var i=0 ; i < tries; ++i) {
-
-  console.log("keyup!");
-
-//var keyPressed = prompt("Enter a key. You have " + tries + " left. To stop the game, type 'stop'. ");
+ //console.log("keyup!");
 
 userGuess.push(event.key);
 
@@ -115,13 +134,37 @@ var keyPressed = event.key;
 console.log(keyPressed);
 
 function recursiveRemove (tempKey) {
-    var index = wordTest.indexOf(tempKey);
+
+    var index  = wordTest.indexOf(tempKey);
+    var index2 = wordVerify.indexOf(tempKey);
     var removed = wordTest.splice(index,1);
+
+
+    wordAnswer[index2] = keyPressed;
+
     /* remove letter from array */
     removed;
 
-    console.log("It exists!", tempKey, wordTest); 
-    console.log("here's what was removed.", removed);
+  //  console.log("It exists!", tempKey, wordTest); 
+     console.log("here's what was removed: + " + removed + "  at index: " + index);
+  //  console.log("wordVerify: ", wordVerify);
+    console.log("Insert " +  tempKey + " at index location " + index2 + " for wordAnswer[]");
+    console.log("wordAnswer :", wordAnswer);
+    console.log("wordVerify :", wordVerify);
+}
+
+function updateBoard (tempKey) {
+  for (var x=0; x < wordVerify.length; ++x) {
+    if (wordVerify[x] === tempKey) {
+      wordAnswer[x] = tempKey;
+    }
+    if (x === 0) {
+      $("#gameWord").html(" " + wordAnswer[x] + " ");
+    }
+    else {
+    $("#gameWord").appendHtml(" " + wordAnswer[x] + " ");
+     } 
+   }
 }
 
 // var isLetter = validEntry.exec(keyPressed);
@@ -138,13 +181,17 @@ if (wordTest.includes(keyPressed) == true)
        /* internal function to handle removing singular values and multiple values */ 
 
             recursiveRemove(keyPressed);
+            
 
            /* after removing the first occurrance of keyPressed, remove all other occurrences also */
            
             while (wordTest.includes(keyPressed) == true) 
+
                 {
                     recursiveRemove(keyPressed);
+                    
                 }
+                updateBoard(keyPressed);
     }     
 
 else if (keyPressed == "stop")
