@@ -6,18 +6,18 @@
   <meta name="viewport" content="width=device-width">
 
   <link rel="stylesheet" href="assets/css/style.css" type="text/css"> 
-  <link href="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet" type="text/css" />
+  
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
 
-  <title>JS Bin</title>
+  <title>Homework #3 - Hangman Game</title>
 </head>
 <body>
-  <title>
-    Homework #3 - Hangman Game
-  </title>
+
   
 <script src="https://code.jquery.com/jquery.min.js"></script>
 
 <script src="https://netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+
 
 <!-- DOM manipulation file created in class -->
 <script src="https://cybernetck.github.io/JS-powered-TODO-List/dom.js"></script>
@@ -34,22 +34,21 @@
   
   <div class="row">
     <div class="col-md-4">
-      <div id="score_section">
-      <h3 id="lives">  Lives = 11 </h3>
-      <h3 id="wins">  # Wins = 0  </h3>
-      <h3>
       
+      <div id="score_section">
+        <h3 id="lives">  Lives = 11 </h3>
+        <h3 id="wins">  # Wins = 0  </h3>
+      </div>
     </div>
-    <div class="col-offset-md-3 col-md-3">
+
+      <div class="col-md-3">
         <h3> Guesses: </h3>
-        <h3 id="guesses">  </h3>
-       
-    </div>
-    </div>
+        <h3 id="guesses">  </h3>  
+      </div>
   </div>
   
 <div class="row">
-  <div class="col-offset-md-3 col-md-3">
+  <div class="col-offset-md-3 col-md-4">
     <div id="gameBoard">
       <h2 id="gameWord"> </h2>
     </div>
@@ -59,6 +58,11 @@
       <h2 id> </h2>
    
   </div>
+  <div class="col-md-3">
+ 
+    <button id="resetButton"><h3> Start Over </h3></button>
+ 
+</div>
 </div>
 
 <div class="row">
@@ -73,17 +77,17 @@ var userGuess = [];
 var tries = 11;
 
 var wordTest = wordRandom();
+
 //clone array
 var wordVerify = wordTest.slice(0);
-
+//create string version for verification and debugging 
 var wordArray = wordTest.join("");
 
 var wordAnswer = [];
 var userGuess = [];
 
 var wins = 0;
-/* regular expression to only count letters a-z as a valid try */
-var validEntry = (/a-z/);
+
 
 console.log(wordArray);
 
@@ -123,13 +127,27 @@ var checkMatch = function (event) {
  
  console.log("Here's a peek at the word...", wordArray, "length: ", wordArray.length);
 
- //console.log("keyup!");
-
 userGuess.push(event.key);
 
 $("#guesses").html(userGuess);
 
 var keyPressed = event.key; 
+
+
+function validateLetters (tempKey) {
+   var alphas = /^[A-Za-z]+$/;
+
+    if (tempKey.match(alphas))
+
+      {
+        return true;
+       }
+
+    else {
+
+      return false;
+    }
+  }
 
 console.log(keyPressed);
 
@@ -167,13 +185,12 @@ function updateBoard (tempKey) {
    }
 }
 
-// var isLetter = validEntry.exec(keyPressed);
+// Validate that only letters are entered
+if (!validateLetters(keyPressed)) {
 
-// if (!isLetter) {
+  $("#gameStatus").html(" Try again - Please enter letters only. ");
 
-//   $("#gameStatus").html(" Try again - Please enter letters only. ");
-
-// }
+}
 
 if (wordTest.includes(keyPressed) == true)
 
@@ -201,7 +218,7 @@ else if (keyPressed == "stop")
     
     } 
 
-else if ((wordTest.includes(keyPressed) == false) && (tries > 0))
+else if ((wordTest.includes(keyPressed) == false) && (tries > 0) && validateLetters(keyPressed))
 
     {
         console.log("Does not exist - try again! ", wordTest);
