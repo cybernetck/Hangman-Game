@@ -44,7 +44,7 @@ CSS for Hangman Game
   #resetButton {
 
     background-color:rgb(108, 116, 112);
-    width : 50%;
+    width : 60%;
     height: 80px;
     opacity: .5;
     transition-duration: 2000ms;
@@ -52,9 +52,9 @@ CSS for Hangman Game
 
   #resetButton:hover {
 
-    background-color:rgb(rgb(226, 12, 12), green, blue);
+    background-color:rgb(226, 12, 12);
     color: #fff;
-    width : 75%;
+    width : 80%;
     opacity: 1.0;
     transition-duration: 2000ms;
 
